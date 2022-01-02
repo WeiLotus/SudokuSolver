@@ -10,11 +10,47 @@
 #   board: 2-d array of ints
 #   pos: (row,col) as (int,int)
 #   input: int
+#   return: bool
 def valid(board,pos,input):
-    for i in range(0,8):
-        if(board[pos[0]][i] == input and i != pos[1]):
+    for i in range(9):
+        if board[pos[0]][i] == input and i != pos[1]:
             return False
-        if(board[i][pos[1]] == input and i != pos[0]):
+        if board[i][pos[1]] == input and i != pos[0]:
             return False
         
+    xPos = pos[0]/3
+    yPos = pos[1]/3
+    
+    for m in range (xPos * 3, xPos * 3 + 3):
+        for n in range(yPos * 3, yPos * 3 + 3):
+            if board[m][n] == input and (xPos,yPos) != pos:
+                return False
     return True
+
+# Effects: prints the current board
+# Param:
+#   board: 2-d array of ints
+def show_board(board):
+    for i in range(9):
+        if i % 3  == 0:
+            print("- - - - - - - - - - -")
+        for j in range(9):
+            if j % 3 == 0 and j != 0:
+                print("|",end=str(board[i][j]) + " ")
+            elif j == 8:
+                print(str(board[i][j]))
+            else:
+                print(str(board[i][j]), end = " ")
+    print("- - - - - - - - - - -")
+
+grid = [ [3, 0, 6, 5, 0, 8, 4, 0, 0], 
+         [5, 2, 0, 0, 0, 0, 0, 0, 0], 
+         [0, 8, 7, 0, 0, 0, 0, 3, 1], 
+         [0, 0, 3, 0, 1, 0, 0, 8, 0], 
+         [9, 0, 0, 8, 6, 3, 0, 0, 5], 
+         [0, 5, 0, 0, 9, 0, 6, 0, 0], 
+         [1, 3, 0, 0, 0, 0, 2, 5, 0], 
+         [0, 0, 0, 0, 0, 0, 0, 7, 4], 
+         [0, 0, 5, 2, 0, 6, 3, 0, 0] ]
+
+#show_board(grid)
