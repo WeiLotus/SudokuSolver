@@ -29,7 +29,7 @@ def solver(bo):
         return True
         
     for i in range(1,10):    
-        if valid(bo, emp, i):
+        if valid(bo, cell, i):
           bo[r][c] = i  
               
           if solver(bo):
@@ -43,7 +43,6 @@ def solver(bo):
 
 # end of solver method
  
-solver(board)
 
 # Effects: returns if the attempted input number on the corresponding position is valid
 # Param:
@@ -58,8 +57,8 @@ def valid(board,pos,input):
         if board[i][pos[1]] == input and i != pos[0]:
             return False
         
-    xPos = pos[0]/3
-    yPos = pos[1]/3
+    xPos = pos[0]//3
+    yPos = pos[1]//3
     
     for m in range (xPos * 3, xPos * 3 + 3):
         for n in range(yPos * 3, yPos * 3 + 3):
@@ -93,4 +92,5 @@ grid = [ [3, 0, 6, 5, 0, 8, 4, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 7, 4], 
          [0, 0, 5, 2, 0, 6, 3, 0, 0] ]
 
-#show_board(grid)
+solver(board)
+show_board(board)
